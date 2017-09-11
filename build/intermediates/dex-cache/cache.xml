@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/bc1c08730aeafd9ece8e6c1b9d7699c57b2df634/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_a843fbb0629e9441456953858e06a1e9e6a17a76.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/constraint-layout-solver-1.0.2_1937b729d1147f39e6ed56a24e4e6eea198b2d24.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/d4cfe9c99a397ed16af59bcef79fbb346ff2c531/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_3933ccf96ea3e55222af2949ab17b118d582bd4c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/3371dc53200bee290c136a78cd1a6e2a41b30135/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_6c3d01cc512ac93622c721bc6097dc6f55058169.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/e811ce44fdb15507b2b6454756987e604f8e6863/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="952944218ecedea1554a513dec0c14d570642843">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_fbc33b266d9da5c3b0106a3e34998bc10e823ffd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/389659f74de59fd0c176e0e2bfa253588c56e75f/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_d06950a1f32054789f0c9b396664087e0a0e7db9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/cda3baccf4bb2226deb4b07bee641519989dc79d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_6f10308de9d77a24dd5f9464916cde7791924152.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/ca17eb5270ad46a337600d767e2bd63f249447da/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_982c61ba6ee6595eab3ce5a89a456d504914dc62.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/7b96fec5cec6a4a63a080713f1b39ec7f04eff35/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="9935891f23923f39d002087085d9696568a9f657">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_c6badf61aa9cec6f9f7b783cc4af3b793a8aa720.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/ed228591b1c768564cff4e2cb7829a83a9a8d8b1/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_1286ecafab6cc7af82d6146287fd4b121d0e81aa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/e7a672bc42d80c4eb8d44cd3de0c7a7b164894cd/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_b02da8d6f04b8ae3fbca6a20b777750d623bf28f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/f731e513e58c53d1d3d6363c0e1504c8ac4fa5be/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_0a56aa0f0ed5057a1b01e44ecab070bed2dad8e2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/26.0.0-alpha1/support-annotations-26.0.0-alpha1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="023ee503b631f69511e335a061ea008f8da60f40">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/support-annotations-26.0.0-alpha1_629978a21646e9ee15b0341684b32fd20e983de3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/ca91eca5ed893a0e987ce04df771c59702f3a60d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_adde68e566ff98cbe62fb96a224f3c913300eb85.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vanessatsai/.android/build-cache/9d43c695386117ffa54b6f19440591e12174c960/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_3db5c8dfe282838bf1dcfe6c6aae412796ee194e.jar" />
+    </item>
+
+</items>
