@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +13,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_CODE_CONTACTS = 1;
+    ExpenseDbHelper helper;
+    LinearLayout ll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,59 +30,56 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
                 Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 startActivity(intent);
 
             }
         });
-        ExpenseDbHelper helper = new ExpenseDbHelper(this);
-        //   helper.getWritableDatabase().rawQuery("select 1",null);
-        Cursor cursor = helper.getReadableDatabase().query(
-                ExpenseContract.TABLE_EXPENSE,
-                null, null, null, null, null, null
-        );
-        /*while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndex(ExpenseContract.ID));
-            String cdata = cursor.getString(cursor.getColumnIndex(ExpenseContract.CDATE));
-            String info = cursor.getString(cursor.getColumnIndex(ExpenseContract.INFO));
-            String amount = cursor.getString(cursor.getColumnIndex(ExpenseContract.AMOUNT));
-            Log.d(TAG,"onCreate " + id + "/ " + cdata +"/"+info+" /"+ amount);
-        }*/
+
+        helper = new ExpenseDbHelper(this);
+
+        ll = (LinearLayout)findViewById(R.id.layout_list);
+
+        Cursor cursor = helper.getReadableDatabase().query(ExpenseContacts.TABLE_EXPENSE,null,null,null,null,null,null);
+
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(cursor.getColumnIndex(ExpenseContacts.ID));
+            String cdata = cursor.getString(cursor.getColumnIndex(ExpenseContacts.CDATE));
+            String info = cursor.getString(cursor.getColumnIndex(ExpenseContacts.INFO));
+            String amount = cursor.getString(cursor.getColumnIndex(ExpenseContacts.AMOUNT));
+            TextView tv = new TextView(this);
+            tv.setText("onCreate " + id + "/ " + cdata +"/"+info+" /"+ amount);
+            ll.addView(tv);
+        }
 
         //dangerous permission checker
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            readContacts();
-        }
-        else{
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_CONTACTS},
-                    REQUEST_CODE_CONTACTS);
+            readContact();
 
         }
-        //getContentResolver().query(ContactsContract.AUTHORITY_URI,null,null,null,null);
+        else
+        {
+         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_CONTACTS},REQUEST_CODE_CONTACTS);
+        }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == REQUEST_CODE_CONTACTS && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-            readContacts();
-        }
+    private void readContact() {
 
-    }
-
-    private void readContacts() {
-       Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
+       Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null,null);
         while (cursor.moveToNext()){
             int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+            String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            TextView tv = new TextView(this);
+            tv.setText("Contact " + id + "/ " + id +"/"+name);
+            ll.addView(tv);
         }
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
