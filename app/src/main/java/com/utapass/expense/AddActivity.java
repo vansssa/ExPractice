@@ -3,7 +3,6 @@ package com.utapass.expense;
 import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -39,8 +38,8 @@ public class AddActivity extends AppCompatActivity {
         values.put(ExpenseContacts.CDATE, cdate);
         values.put(ExpenseContacts.INFO, info);
         values.put(ExpenseContacts.AMOUNT, amount);
-        long result = helper.getWritableDatabase().insert(ExpenseContacts.TABLE_EXPENSE, null, values);
-        Log.i("VA", "result " + result);
+        //long result = helper.getWritableDatabase().insert(ExpenseContacts.TABLE_EXPENSE, null, values);
+        getContentResolver().insert(ExpenseContacts.CONTENT_URI,values);
 
     }
 

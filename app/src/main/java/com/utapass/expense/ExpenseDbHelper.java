@@ -37,7 +37,7 @@ public class ExpenseDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase Db) {
         Log.i("VA","Create DB");
-        Db.execSQL(ExpenseContacts.CREATE_TABLE_SQL);
+        Db.execSQL(ExpenseContacts.Expense_Table.CREATE_TABLE_SQL);
         readDataFromRaw(Db);
 
 
@@ -66,13 +66,13 @@ public class ExpenseDbHelper extends SQLiteOpenHelper {
             json = new JSONObject(sb.toString());
             JSONArray array =  json.getJSONArray(this.context.getString(R.string.json_expenses));
             for (int i = 0 ; i < array.length();i++) {
-                String cdate = array.getJSONObject(i).getString(ExpenseContacts.CDATE);
-                String info = array.getJSONObject(i).getString(ExpenseContacts.INFO);
-                int amount = Integer.parseInt(array.getJSONObject(i).getString(ExpenseContacts.AMOUNT));
+                String cdate = array.getJSONObject(i).getString(ExpenseContacts.Expense_Table.CDATE);
+                String info = array.getJSONObject(i).getString(ExpenseContacts.Expense_Table.INFO);
+                int amount = Integer.parseInt(array.getJSONObject(i).getString(ExpenseContacts.Expense_Table.AMOUNT));
                 ContentValues values = new ContentValues();
-                values.put(ExpenseContacts.CDATE, cdate);
-                values.put(ExpenseContacts.INFO, info);
-                values.put(ExpenseContacts.AMOUNT, amount);
+                values.put(ExpenseContacts.Expense_Table.CDATE, cdate);
+                values.put(ExpenseContacts.Expense_Table.INFO, info);
+                values.put(ExpenseContacts.Expense_Table.AMOUNT, amount);
                 long id = db.insert(ExpenseContacts.TABLE_EXPENSE, null, values);
                 Log.i("VA","id "+ id);
 

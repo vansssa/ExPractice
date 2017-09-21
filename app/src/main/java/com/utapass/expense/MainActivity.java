@@ -1,9 +1,11 @@
 package com.utapass.expense;
 
 import android.Manifest;
+import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
@@ -41,20 +43,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        helper = new ExpenseDbHelper(this);
-
+        //sqlite
+        //helper = new ExpenseDbHelper(this);
+        //ll = (LinearLayout)findViewById(R.id.layout_list);
+        //Cursor cursor = helper.getReadableDatabase().query(ExpenseContacts.TABLE_EXPENSE,null,null,null,null,null,null);
         ll = (LinearLayout)findViewById(R.id.layout_list);
+        Cursor cursor=  getContentResolver().query(ExpenseContacts.CONTENT_URI,null,null,null,null);
+        Uri test = ContentUris.withAppendedId(ExpenseContacts.CONTENT_URI,3);
+        cursor = getContentResolver().query(test,null,null,null,null,null);
 
-        Cursor cursor = helper.getReadableDatabase().query(ExpenseContacts.TABLE_EXPENSE,null,null,null,null,null,null);
-
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(cursor.getColumnIndex(ExpenseContacts.ID));
-            String cdata = cursor.getString(cursor.getColumnIndex(ExpenseContacts.CDATE));
-            String info = cursor.getString(cursor.getColumnIndex(ExpenseContacts.INFO));
-            String amount = cursor.getString(cursor.getColumnIndex(ExpenseContacts.AMOUNT));
-            TextView tv = new TextView(this);
-            tv.setText("onCreate " + id + "/ " + cdata +"/"+info+" /"+ amount);
-            ll.addView(tv);
+        if(cursor!=null) {
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(ExpenseContacts.Expense_Table.ID));
+                String cdata = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.CDATE));
+                String info = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.INFO));
+                String amount = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.AMOUNT));
+                TextView tv = new TextView(this);
+                tv.setText("onCreate " + id + "/ " + cdata + "/" + info + " /" + amount);
+                ll.addView(tv);
+            }
         }
 
         //dangerous permission checker
