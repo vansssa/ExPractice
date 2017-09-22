@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
     LinearLayout ll;
     RecyclerView recyclerView;
     public Expense_Adapter adater;
+    private String order = ExpenseContacts.Expense_Table.CDATE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +153,14 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
         if (id == R.id.action_settings) {
             return true;
         }
+        if(id == R.id.action_order) {
+         if(order.equals(ExpenseContacts.Expense_Table.CDATE))
+             order = ExpenseContacts.Expense_Table.INFO;
+         else
+             order = ExpenseContacts.Expense_Table.CDATE;
 
+            getLoaderManager().restartLoader(LOADER,null,this); 
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -179,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         //first init loader
-        return new CursorLoader(this,ExpenseContacts.CONTENT_URI,null,null,null,null);
+        return new CursorLoader(this,ExpenseContacts.CONTENT_URI,null,null,null,order);
     }
 
     @Override
