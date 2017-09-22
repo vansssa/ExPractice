@@ -1,24 +1,40 @@
 package com.utapass.expense;
 
 import android.Manifest;
+import android.app.LoaderManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements onItemClickInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_CODE_CONTACTS = 1;
+    private static final int LOADER = 200;
+    ExpenseDbHelper helper;
+    LinearLayout ll;
+    RecyclerView recyclerView;
+    public Expense_Adapter adater;
+    private String order = ExpenseContacts.Expense_Table.CDATE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,59 +43,97 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
                 Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 startActivity(intent);
 
             }
         });
-        ExpenseDbHelper helper = new ExpenseDbHelper(this);
-        //   helper.getWritableDatabase().rawQuery("select 1",null);
-        Cursor cursor = helper.getReadableDatabase().query(
-                ExpenseContract.TABLE_EXPENSE,
-                null, null, null, null, null, null
-        );
-        /*while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndex(ExpenseContract.ID));
-            String cdata = cursor.getString(cursor.getColumnIndex(ExpenseContract.CDATE));
-            String info = cursor.getString(cursor.getColumnIndex(ExpenseContract.INFO));
-            String amount = cursor.getString(cursor.getColumnIndex(ExpenseContract.AMOUNT));
-            Log.d(TAG,"onCreate " + id + "/ " + cdata +"/"+info+" /"+ amount);
-        }*/
 
-        //dangerous permission checker
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            readContacts();
-        }
-        else{
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_CONTACTS},
-                    REQUEST_CODE_CONTACTS);
 
-        }
-        //getContentResolver().query(ContactsContract.AUTHORITY_URI,null,null,null,null);
+
+
+
+        //Test for specific uri
+        //Uri test = ContentUris.withAppendedId(ExpenseContacts.CONTENT_URI,3);
+        //cursor = getContentResolver().query(test,null,null,null,null,null);
+
+
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == REQUEST_CODE_CONTACTS && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-            readContacts();
-        }
+    protected void onStart() {
+        super.onStart();
+        // set up recycle view property
+        Log.i("VA","onstart");
+        refreshRecycleView();
+        registerReceiver(receiver,new IntentFilter(ExpenseIntentService.LAST));
+        getLoaderManager().initLoader(LOADER,null,this);
 
     }
 
-    private void readContacts() {
-       Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-        }
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("VA","onStop");
+        unregisterReceiver(receiver);
     }
+
+    private void refreshRecycleView(){
+        recyclerView = (RecyclerView) findViewById(R.id.recycleview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        adater = new Expense_Adapter();
+        adater.setOnItemClickListener(this);
+        recyclerView.setAdapter(adater);
+
+        //if update is here
+        getLoaderManager().restartLoader(LOADER,null,this);
+    }
+    private void selite(){
+
+        //helper = new ExpenseDbHelper(this);
+        //ll = (LinearLayout)findViewById(R.id.layout_list);
+        //Cursor cursor = helper.getReadableDatabase().query(ExpenseContacts.TABLE_EXPENSE,null,null,null,null,null,null);
+//
+    }
+
+    private void setlilearelayout() {
+        //ll = (LinearLayout) findViewById(R.id.layout_list);
+        //while (cursor.moveToNext()) {
+        //    //int id = cursor.getInt(cursor.getColumnIndex(ExpenseContacts.Expense_Table.ID));
+        //    //String cdata = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.CDATE));
+        //    //String info = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.INFO));
+        //    //String amount = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.AMOUNT));
+        //    //TextView tv = new TextView(this);
+        //    //tv.setText("onCreate " + id + "/ " + cdata + "/" + info + " /" + amount);
+        //    //ll.addView(tv);
+
+        //}
+    }
+    private void readContact() {
+
+        //dangerous permission checker
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+            //readContact();
+            Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null, null);
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                TextView tv = new TextView(this);
+                tv.setText("Contact " + id + "/ " + id + "/" + name);
+                ll.addView(tv);
+            }
+
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_CODE_CONTACTS);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,7 +153,52 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if(id == R.id.action_order) {
+         if(order.equals(ExpenseContacts.Expense_Table.CDATE))
+             order = ExpenseContacts.Expense_Table.INFO;
+         else
+             order = ExpenseContacts.Expense_Table.CDATE;
 
+            getLoaderManager().restartLoader(LOADER,null,this); 
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+    @Override
+    public void itemclicked(int position ,  Expense ex) {
+
+        Intent detail = new Intent(this,Detail.class);
+        detail.putExtra(getString(R.string.json_expenses), ex);
+        startActivity(detail);
+
+    }
+
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals(ExpenseIntentService.LAST))
+                Log.d("VA","receive posistion");
+                refreshRecycleView();
+        }
+    };
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        //first init loader
+        return new CursorLoader(this,ExpenseContacts.CONTENT_URI,null,null,null,order);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        //notified recycleview update, restart loader everytime
+        adater.swapCursor(cursor);
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 }

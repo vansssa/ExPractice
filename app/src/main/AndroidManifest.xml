@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.utapass.expense">
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddActivity"></activity>
+        <activity android:name=".AddActivity" />
+
+        <provider
+            android:name=".ExContentProvider"
+            android:authorities="com.utapass.expense" />
+
+        <activity android:name=".Detail"></activity>
+
+        <service android:name=".ExpenseIntentService"/>
     </application>
 
 </manifest>

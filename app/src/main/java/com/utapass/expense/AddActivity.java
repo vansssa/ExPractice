@@ -3,7 +3,6 @@ package com.utapass.expense;
 import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -13,7 +12,7 @@ public class AddActivity extends AppCompatActivity {
     private EditText edDate;
     private EditText edInfo;
     private EditText edAmount;
-
+    ExpenseDbHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,19 +20,27 @@ public class AddActivity extends AppCompatActivity {
         edDate = (EditText) findViewById(R.id.ed_date);
         edInfo = (EditText) findViewById(R.id.ed_info);
         edAmount = (EditText) findViewById(R.id.ed_amount);
+        helper = new ExpenseDbHelper(this);
+
+
     }
 
     public void add(View v){
-        String date = edDate.getText().toString();
+        String cdata = edDate.getText().toString();
         String info = edInfo.getText().toString();
         int amount = Integer.parseInt(edAmount.getText().toString());
-        ExpenseDbHelper helper = new ExpenseDbHelper(this);
 
-        ContentValues values = new ContentValues();
-        values.put("cdate",date);
-        values.put("info",info);
-        values.put("amount",amount);
-        long id = helper.getWritableDatabase().insert("exp", null, values);
-        Log.d(TAG, "add: " + id);
+        insertToDB(cdata,info,amount);
     }
+
+    private void insertToDB(String cdate,String info, int amount) {
+        ContentValues values = new ContentValues();
+        values.put(ExpenseContacts.Expense_Table.CDATE, cdate);
+        values.put(ExpenseContacts.Expense_Table.INFO, info);
+        values.put(ExpenseContacts.Expense_Table.AMOUNT, amount);
+        //long result = helper.getWritableDatabase().insert(ExpenseContacts.TABLE_EXPENSE, null, values);
+        getContentResolver().insert(ExpenseContacts.CONTENT_URI,values);
+
+    }
+
 }
