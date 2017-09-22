@@ -18,7 +18,7 @@ public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHo
     private onItemClickInterface onItemClickListener; //listener and sender
 
 
-    public Expense_Adapter(Cursor cursor) {
+    private Expense_Adapter(Cursor cursor) {
         this.cursor =cursor;
 
     }
@@ -60,7 +60,8 @@ public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHo
     //step 0
     @Override
     public int getItemCount() {
-        return cursor.getCount();
+
+        return (cursor!=null)? cursor.getCount(): 0;
     }
 
     public void setOnItemClickListener(onItemClickInterface onItemClickListener) {
@@ -80,7 +81,14 @@ public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHo
         }
     }
 
-   //public interface onRecycleViewItemClickListener{
+
+    public void swapCursor(Cursor cursor) {
+        //input cursor
+        this.cursor = cursor;
+        notifyDataSetChanged();
+    }
+
+    //public interface onRecycleViewItemClickListener{
    //    void onItemClicked(int position, Expense ex);
 
    //}

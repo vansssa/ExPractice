@@ -1,10 +1,13 @@
 package com.utapass.expense;
 
 import android.Manifest;
+import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -22,10 +25,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements onItemClickInterface{
+public class MainActivity extends AppCompatActivity implements onItemClickInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_CODE_CONTACTS = 1;
+    private static final int LOADER = 200;
     ExpenseDbHelper helper;
     LinearLayout ll;
     RecyclerView recyclerView;
@@ -64,14 +68,17 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
     protected void onStart() {
         super.onStart();
         // set up recycle view property
+        Log.i("VA","onstart");
         refreshRecycleView();
         registerReceiver(receiver,new IntentFilter(ExpenseIntentService.LAST));
+        getLoaderManager().initLoader(LOADER,null,this);
 
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
+        Log.i("VA","onStop");
         unregisterReceiver(receiver);
     }
 
@@ -79,11 +86,12 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-
-        Cursor cursor = getContentResolver().query(ExpenseContacts.CONTENT_URI,null,null,null,null);
-        adater = new Expense_Adapter(cursor);
+        adater = new Expense_Adapter();
         adater.setOnItemClickListener(this);
         recyclerView.setAdapter(adater);
+
+        //if update is here
+        getLoaderManager().restartLoader(LOADER,null,this);
     }
     private void selite(){
 
@@ -167,4 +175,22 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
                 refreshRecycleView();
         }
     };
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        //first init loader
+        return new CursorLoader(this,ExpenseContacts.CONTENT_URI,null,null,null,null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        //notified recycleview update, restart loader everytime
+        adater.swapCursor(cursor);
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
 }
