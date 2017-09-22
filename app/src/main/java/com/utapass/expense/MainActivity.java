@@ -1,16 +1,13 @@
 package com.utapass.expense;
 
-import android.Manifest;
-import android.content.ContentUris;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CONTACTS = 1;
     ExpenseDbHelper helper;
     LinearLayout ll;
+    RecyclerView recyclerView;
+    public Expense_Adapter adater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,36 +42,58 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //sqlite
-        //helper = new ExpenseDbHelper(this);
-        //ll = (LinearLayout)findViewById(R.id.layout_list);
-        //Cursor cursor = helper.getReadableDatabase().query(ExpenseContacts.TABLE_EXPENSE,null,null,null,null,null,null);
-        ll = (LinearLayout)findViewById(R.id.layout_list);
-        Cursor cursor=  getContentResolver().query(ExpenseContacts.CONTENT_URI,null,null,null,null);
-        Uri test = ContentUris.withAppendedId(ExpenseContacts.CONTENT_URI,3);
-        cursor = getContentResolver().query(test,null,null,null,null,null);
 
-        if(cursor!=null) {
-            while (cursor.moveToNext()) {
-                int id = cursor.getInt(cursor.getColumnIndex(ExpenseContacts.Expense_Table.ID));
-                String cdata = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.CDATE));
-                String info = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.INFO));
-                String amount = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.AMOUNT));
-                TextView tv = new TextView(this);
-                tv.setText("onCreate " + id + "/ " + cdata + "/" + info + " /" + amount);
-                ll.addView(tv);
-            }
-        }
+        // set up recycle view property
+        recyclerView = (RecyclerView) findViewById(R.id.recycleview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+
+        Cursor cursor=  getContentResolver().query(ExpenseContacts.CONTENT_URI,null,null,null,null);
+
+        adater = new Expense_Adapter(cursor);
+        recyclerView.setAdapter(adater);
+
+
+        //Test for specific uri
+        //Uri test = ContentUris.withAppendedId(ExpenseContacts.CONTENT_URI,3);
+        //cursor = getContentResolver().query(test,null,null,null,null,null);
+
 
         //dangerous permission checker
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            readContact();
+        //if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+        //    readContact();
+        //
+        //}
+        //else
+        //{
+        // ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_CONTACTS},REQUEST_CODE_CONTACTS);
+        //}
+    }
 
-        }
-        else
-        {
-         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_CONTACTS},REQUEST_CODE_CONTACTS);
-        }
+    private void selite(){
+        //sqlite
+
+        //helper = new ExpenseDbHelper(this);
+
+        //ll = (LinearLayout)findViewById(R.id.layout_list);
+
+        //Cursor cursor = helper.getReadableDatabase().query(ExpenseContacts.TABLE_EXPENSE,null,null,null,null,null,null);
+
+    }
+
+    private void setlilearelayout(){
+        //ll = (LinearLayout)findViewById(R.id.layout_list);
+        //while (cursor.moveToNext()) {
+        //    //int id = cursor.getInt(cursor.getColumnIndex(ExpenseContacts.Expense_Table.ID));
+        //    //String cdata = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.CDATE));
+        //    //String info = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.INFO));
+        //    //String amount = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.AMOUNT));
+        //    //TextView tv = new TextView(this);
+        //    //tv.setText("onCreate " + id + "/ " + cdata + "/" + info + " /" + amount);
+        //    //ll.addView(tv);
+        //
+        //}
     }
 
     private void readContact() {

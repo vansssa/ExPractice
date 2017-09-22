@@ -8,12 +8,10 @@
     tools:context="com.utapass.expense.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <LinearLayout
-        android:id="@+id/layout_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="1px"
-        android:layout_y="1px"
-        android:orientation="vertical" />
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleview"
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
 </android.support.constraint.ConstraintLayout>

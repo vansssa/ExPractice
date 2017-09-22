@@ -23,6 +23,7 @@
         <provider
             android:authorities="com.utapass.expense"
             android:name=".ExContentProvider"/>
+
     </application>
 
 </manifest>

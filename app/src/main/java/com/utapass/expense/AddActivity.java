@@ -35,9 +35,9 @@ public class AddActivity extends AppCompatActivity {
 
     private void insertToDB(String cdate,String info, int amount) {
         ContentValues values = new ContentValues();
-        values.put(ExpenseContacts.CDATE, cdate);
-        values.put(ExpenseContacts.INFO, info);
-        values.put(ExpenseContacts.AMOUNT, amount);
+        values.put(ExpenseContacts.Expense_Table.CDATE, cdate);
+        values.put(ExpenseContacts.Expense_Table.INFO, info);
+        values.put(ExpenseContacts.Expense_Table.AMOUNT, amount);
         //long result = helper.getWritableDatabase().insert(ExpenseContacts.TABLE_EXPENSE, null, values);
         getContentResolver().insert(ExpenseContacts.CONTENT_URI,values);
 
