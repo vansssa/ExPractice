@@ -25,6 +25,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.utapass.expense.EventBus.ExpenseEventBus;
+
+import de.greenrobot.event.EventBus;
+
 public class MainActivity extends AppCompatActivity implements onItemClickInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -73,15 +77,31 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
         refreshRecycleView();
         registerReceiver(receiver,new IntentFilter(ExpenseIntentService.LAST));
         getLoaderManager().initLoader(LOADER,null,this);
+        EventBus.getDefault().register(this);
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         Log.i("VA","onStop");
-        unregisterReceiver(receiver);
+        //unregisterReceiver(receiver);
     }
+
+    public void onEvent(ExpenseEventBus event) {
+        /* 處理事件 */
+        Log.i("VA", "OXOXOXOXO  "+event.getMessgae());
+        if(event.getMessgae().equals(ExpenseIntentService.EVENT_LAST));
+           // refreshRecycleView();
+
+    }
+
 
     private void refreshRecycleView(){
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);

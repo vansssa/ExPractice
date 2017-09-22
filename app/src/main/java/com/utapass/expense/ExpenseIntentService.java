@@ -7,6 +7,10 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.utapass.expense.EventBus.ExpenseEventBus;
+
+import de.greenrobot.event.EventBus;
+
 /**
  * Created by vanessatsai on 2017/9/22.
  */
@@ -14,6 +18,7 @@ import android.util.Log;
 public class ExpenseIntentService extends IntentService {
     public static final  String EXTRA_VALUE = "EXTRA_VALUE";
     public static final  String LAST = "LAST";
+    public static final  String EVENT_LAST = "LAST";
 
     public ExpenseIntentService() {
         super("ExpenseIntentService"); // identified Intentservice ID
@@ -29,8 +34,9 @@ public class ExpenseIntentService extends IntentService {
         if(result) {
             //refresh UI
             Log.d("VA","last in service");
-            Intent last=new Intent(LAST);
-            sendBroadcast(last);
+            //Intent last=new Intent(LAST);
+            //sendBroadcast(last);
+            EventBus.getDefault().post(new ExpenseEventBus(EVENT_LAST));
         }
 
 
