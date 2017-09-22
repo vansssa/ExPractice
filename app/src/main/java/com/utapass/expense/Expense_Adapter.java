@@ -2,6 +2,7 @@ package com.utapass.expense;
 
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,18 @@ import android.widget.TextView;
  * Created by vanessatsai on 2017/9/21.
  */
 
-public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHolder> {
+public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHolder>{
 
-    private final Cursor cursor;
+    private Cursor cursor;
+    private onItemClickInterface onItemClickListener; //listener and sender
+
 
     public Expense_Adapter(Cursor cursor) {
         this.cursor =cursor;
+
+    }
+
+    public Expense_Adapter() {
 
     }
 
@@ -32,14 +39,20 @@ public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHo
 
     //step 3
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         cursor.moveToPosition(position);
-        int id = cursor.getInt(cursor.getColumnIndex(ExpenseContacts.Expense_Table.ID));
-        String cdata = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.CDATE));
-        String info = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.INFO));
-        String amount = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.AMOUNT));
-        holder.dateTextView.setText(cdata);
-        holder.infoTextView.setText(info);
+        Expense ex = new Expense(cursor);
+
+        holder.dateTextView.setText(ex.getCdata());
+        holder.infoTextView.setText(ex.getInfo());
+        holder.itemView.setTag(ex); // all information into itemView
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("VA","0000000"+position);
+                onItemClickListener.itemclicked(position, (Expense) view.getTag());
+            }
+        });
 
     }
 
@@ -48,6 +61,10 @@ public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHo
     @Override
     public int getItemCount() {
         return cursor.getCount();
+    }
+
+    public void setOnItemClickListener(onItemClickInterface onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
 
@@ -62,4 +79,14 @@ public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHo
             infoTextView  =itemView.findViewById(R.id.row_info);
         }
     }
+
+   //public interface onRecycleViewItemClickListener{
+   //    void onItemClicked(int position, Expense ex);
+
+   //}
+
+   //public void setOnRecyclerViewItemClickListener(onRecycleViewItemClickListener onRecycleViewClickListener){
+   //    this.onRecycleViewClickListener = onRecycleViewClickListener;
+
+   //}
 }

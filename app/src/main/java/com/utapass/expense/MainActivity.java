@@ -1,21 +1,28 @@
 package com.utapass.expense;
 
+import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements onItemClickInterface{
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_CODE_CONTACTS = 1;
@@ -43,16 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // set up recycle view property
-        recyclerView = (RecyclerView) findViewById(R.id.recycleview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
 
-
-        Cursor cursor=  getContentResolver().query(ExpenseContacts.CONTENT_URI,null,null,null,null);
-
-        adater = new Expense_Adapter(cursor);
-        recyclerView.setAdapter(adater);
 
 
         //Test for specific uri
@@ -60,30 +58,43 @@ public class MainActivity extends AppCompatActivity {
         //cursor = getContentResolver().query(test,null,null,null,null,null);
 
 
-        //dangerous permission checker
-        //if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-        //    readContact();
-        //
-        //}
-        //else
-        //{
-        // ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_CONTACTS},REQUEST_CODE_CONTACTS);
-        //}
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // set up recycle view property
+        refreshRecycleView();
+        registerReceiver(receiver,new IntentFilter(ExpenseIntentService.LAST));
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
+
+    private void refreshRecycleView(){
+        recyclerView = (RecyclerView) findViewById(R.id.recycleview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+        Cursor cursor = getContentResolver().query(ExpenseContacts.CONTENT_URI,null,null,null,null);
+        adater = new Expense_Adapter(cursor);
+        adater.setOnItemClickListener(this);
+        recyclerView.setAdapter(adater);
+    }
     private void selite(){
-        //sqlite
 
         //helper = new ExpenseDbHelper(this);
-
         //ll = (LinearLayout)findViewById(R.id.layout_list);
-
         //Cursor cursor = helper.getReadableDatabase().query(ExpenseContacts.TABLE_EXPENSE,null,null,null,null,null,null);
-
+//
     }
 
-    private void setlilearelayout(){
-        //ll = (LinearLayout)findViewById(R.id.layout_list);
+    private void setlilearelayout() {
+        //ll = (LinearLayout) findViewById(R.id.layout_list);
         //while (cursor.moveToNext()) {
         //    //int id = cursor.getInt(cursor.getColumnIndex(ExpenseContacts.Expense_Table.ID));
         //    //String cdata = cursor.getString(cursor.getColumnIndex(ExpenseContacts.Expense_Table.CDATE));
@@ -92,19 +103,25 @@ public class MainActivity extends AppCompatActivity {
         //    //TextView tv = new TextView(this);
         //    //tv.setText("onCreate " + id + "/ " + cdata + "/" + info + " /" + amount);
         //    //ll.addView(tv);
-        //
+
         //}
     }
-
     private void readContact() {
 
-       Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null,null);
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-            String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-            TextView tv = new TextView(this);
-            tv.setText("Contact " + id + "/ " + id +"/"+name);
-            ll.addView(tv);
+        //dangerous permission checker
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+            //readContact();
+            Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null, null);
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                TextView tv = new TextView(this);
+                tv.setText("Contact " + id + "/ " + id + "/" + name);
+                ll.addView(tv);
+            }
+
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_CODE_CONTACTS);
         }
     }
 
@@ -130,4 +147,24 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+    @Override
+    public void itemclicked(int position ,  Expense ex) {
+
+        Intent detail = new Intent(this,Detail.class);
+        detail.putExtra(getString(R.string.json_expenses), ex);
+        startActivity(detail);
+
+    }
+
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals(ExpenseIntentService.LAST))
+                Log.d("VA","receive posistion");
+                refreshRecycleView();
+        }
+    };
 }
