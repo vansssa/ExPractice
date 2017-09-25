@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHolder>{
 
     private Cursor cursor;
-    private onItemClickInterface onItemClickListener; //listener and sender
+    private OnItemClickInterface onItemClickListener; //listener and sender
 
 
     private Expense_Adapter(Cursor cursor) {
@@ -46,6 +46,7 @@ public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHo
         holder.dateTextView.setText(ex.getCdata());
         holder.infoTextView.setText(ex.getInfo());
         holder.itemView.setTag(ex); // all information into itemView
+        holder.accountTextView.setAmount(ex.getAmount());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +65,7 @@ public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHo
         return (cursor!=null)? cursor.getCount(): 0;
     }
 
-    public void setOnItemClickListener(onItemClickInterface onItemClickListener) {
+    public void setOnItemClickListener(OnItemClickInterface onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -73,11 +74,13 @@ public class Expense_Adapter extends RecyclerView.Adapter<Expense_Adapter.ViewHo
 
         private final TextView dateTextView;
         private final TextView infoTextView;
+        private final custom_textview accountTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             dateTextView = itemView.findViewById(R.id.row_date);
             infoTextView  =itemView.findViewById(R.id.row_info);
+            accountTextView  =itemView.findViewById(R.id.row_amount);
         }
     }
 

@@ -21,4 +21,14 @@
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="30sp" />
+
+    <view
+        android:id="@+id/row_amount"
+        class="com.utapass.expense.custom_textview"
+        id="@+id/view"
+        layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_textview" />
+
 </LinearLayout>

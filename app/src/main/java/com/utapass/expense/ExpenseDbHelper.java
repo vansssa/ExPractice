@@ -2,7 +2,6 @@ package com.utapass.expense;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -77,16 +76,12 @@ public class ExpenseDbHelper extends SQLiteOpenHelper {
                 //long id = db.insert(ExpenseContacts.TABLE_EXPENSE, null, values);
 
                 //ExpenseIntentService service = new ExpenseIntentService();
-                Intent intent =new Intent(context,ExpenseIntentService.class);
-                intent.putExtra(ExpenseIntentService.EXTRA_VALUE,values);
-                intent.putExtra(ExpenseIntentService.LAST, (i == array.length()-1)? true : false);
-                context.startService(intent);
-
-
-
-
-
-
+                //Intent intent =new Intent(context,ExpenseIntentService.class);
+                //intent.putExtra(ExpenseIntentService.EXTRA_VALUE,values);
+                //intent.putExtra(ExpenseIntentService.LAST, (i == array.length()-1)? true : false);
+                //context.startService(intent);
+                boolean last =  (i == array.length()-1);
+                ExpenseIntentService.insertExpense(context,values,last);
 
             }
 

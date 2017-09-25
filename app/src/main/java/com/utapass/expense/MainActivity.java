@@ -6,12 +6,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -23,13 +21,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.utapass.expense.EventBus.ExpenseEventBus;
 
 import de.greenrobot.event.EventBus;
 
-public class MainActivity extends AppCompatActivity implements onItemClickInterface, LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends AppCompatActivity implements OnItemClickInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_CODE_CONTACTS = 1;
@@ -59,9 +56,6 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
         });
 
 
-
-
-
         //Test for specific uri
         //Uri test = ContentUris.withAppendedId(ExpenseContacts.CONTENT_URI,3);
         //cursor = getContentResolver().query(test,null,null,null,null,null);
@@ -73,9 +67,9 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
     protected void onStart() {
         super.onStart();
         // set up recycle view property
-        Log.i("VA","onstart");
+        Log.i(TAG,"onstart");
         refreshRecycleView();
-        registerReceiver(receiver,new IntentFilter(ExpenseIntentService.LAST));
+        //registerReceiver(receiver,new IntentFilter(ExpenseIntentService.EXTRA_LAST));
         getLoaderManager().initLoader(LOADER,null,this);
         EventBus.getDefault().register(this);
 
@@ -90,16 +84,15 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i("VA","onStop");
+
         //unregisterReceiver(receiver);
     }
 
-    public void onEvent(ExpenseEventBus event) {
+    public void onEventMainThread(ExpenseEventBus event) {
         /* 處理事件 */
-        Log.i("VA", "OXOXOXOXO  "+event.getMessgae());
+        Log.i(TAG, "Event Bus:  "+event.getMessgae());
         if(event.getMessgae().equals(ExpenseIntentService.EVENT_LAST));
-           // refreshRecycleView();
-
+            refreshRecycleView();
     }
 
 
@@ -138,16 +131,16 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
     private void readContact() {
 
         //dangerous permission checker
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             //readContact();
-            Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null, null);
-            while (cursor.moveToNext()) {
-                int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                TextView tv = new TextView(this);
-                tv.setText("Contact " + id + "/ " + id + "/" + name);
-                ll.addView(tv);
-            }
+            //Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null, null);
+            //while (cursor.moveToNext()) {
+            //    int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+            //    String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            //    TextView tv = new TextView(this);
+            //    tv.setText("Contact " + id + "/ " + id + "/" + name);
+            //    ll.addView(tv);
+            //}
 
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_CODE_CONTACTS);
@@ -198,8 +191,8 @@ public class MainActivity extends AppCompatActivity implements onItemClickInterf
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getAction().equals(ExpenseIntentService.LAST))
-                Log.d("VA","receive posistion");
+            if(intent.getAction().equals(ExpenseIntentService.EXTRA_LAST))
+                Log.d(TAG,"receive posistion");
                 refreshRecycleView();
         }
     };

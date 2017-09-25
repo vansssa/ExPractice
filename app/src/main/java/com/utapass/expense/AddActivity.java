@@ -38,7 +38,6 @@ public class AddActivity extends AppCompatActivity {
         values.put(ExpenseContacts.Expense_Table.CDATE, cdate);
         values.put(ExpenseContacts.Expense_Table.INFO, info);
         values.put(ExpenseContacts.Expense_Table.AMOUNT, amount);
-        //long result = helper.getWritableDatabase().insert(ExpenseContacts.TABLE_EXPENSE, null, values);
         getContentResolver().insert(ExpenseContacts.CONTENT_URI,values);
 
     }
