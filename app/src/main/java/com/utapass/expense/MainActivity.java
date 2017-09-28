@@ -2,8 +2,6 @@ package com.utapass.expense;
 
 import android.Manifest;
 import android.app.LoaderManager;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -164,6 +162,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickInterf
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            //加载PrefFragment
+           Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
         if(id == R.id.action_order) {
@@ -188,15 +190,19 @@ public class MainActivity extends AppCompatActivity implements OnItemClickInterf
 
     }
 
-    BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if(intent.getAction().equals(ExpenseIntentService.EXTRA_LAST))
-                Log.d(TAG,"receive posistion");
-                refreshRecycleView();
-        }
-    };
+    //BroadcastReceiver receiver = new BroadcastReceiver() {
+    //    @Override
+    //    public void onReceive(Context context, Intent intent) {
+    //        if(intent.getAction().equals(ExpenseIntentService.EXTRA_LAST))
+    //            Log.d(TAG,"receive posistion");
+    //            refreshRecycleView();
+    //    }
+    //};
 
+
+
+
+    //cursor loader.
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         //first init loader

@@ -3,138 +3,102 @@
 
     <item
         is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/bc1c08730aeafd9ece8e6c1b9d7699c57b2df634/output/jars/classes.jar"
+        jar="/Applications/Android Studio.app/Contents/gradle/m2repository/com/google/guava/guava/17.0/guava-17.0.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_a843fbb0629e9441456953858e06a1e9e6a17a76.jar" />
+        sha1="9c6ef172e8de35fd8d4d8783e4821e57cdef7445">
+        <dex dex="/Users/vanessatsai/Expense/ExPractice/app/build/intermediates/pre-dexed/androidTest/debug/guava-17.0_5438fc06903fbe45a2079ea5ec73aa7c744719c4.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vanessatsai/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
+        jar="/Users/vanessatsai/.gradle/caches/modules-2/files-2.1/info.cukes/cucumber-picocontainer/1.2.4/415ef48ddc2409272f383f2ea844cb821b657cf/cucumber-picocontainer-1.2.4.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/constraint-layout-solver-1.0.2_1937b729d1147f39e6ed56a24e4e6eea198b2d24.jar" />
+        sha1="0415ef48ddc2409272f383f2ea844cb821b657cf">
+        <dex dex="/Users/vanessatsai/Expense/ExPractice/app/build/intermediates/pre-dexed/androidTest/debug/cucumber-picocontainer-1.2.4_7fe4dc726542c5b23ff28703cf3edb7353b437a7.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/d4cfe9c99a397ed16af59bcef79fbb346ff2c531/output/jars/classes.jar"
+        jar="/Users/vanessatsai/.gradle/caches/modules-2/files-2.1/info.cukes/cucumber-jvm-deps/1.0.3/cccdeff234db8b12e91ae2529812f1240b4d5603/cucumber-jvm-deps-1.0.3.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_3933ccf96ea3e55222af2949ab17b118d582bd4c.jar" />
+        sha1="cccdeff234db8b12e91ae2529812f1240b4d5603">
+        <dex dex="/Users/vanessatsai/Expense/ExPractice/app/build/intermediates/pre-dexed/androidTest/debug/cucumber-jvm-deps-1.0.3_3f609ddec6a6286379b45aa17cc540ac9799e6a1.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/3371dc53200bee290c136a78cd1a6e2a41b30135/output/jars/classes.jar"
+        jar="/Users/vanessatsai/.gradle/caches/modules-2/files-2.1/org.picocontainer/picocontainer/2.15/1b05ebc330fb947f74fe98469f64f99e6bdd9892/picocontainer-2.15.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_6c3d01cc512ac93622c721bc6097dc6f55058169.jar" />
+        sha1="1b05ebc330fb947f74fe98469f64f99e6bdd9892">
+        <dex dex="/Users/vanessatsai/Expense/ExPractice/app/build/intermediates/pre-dexed/androidTest/debug/picocontainer-2.15_d06aaeb7521079b2d2cb58617a7e29ef7579c1f8.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/e811ce44fdb15507b2b6454756987e604f8e6863/output/jars/classes.jar"
+        jar="/Users/vanessatsai/.gradle/caches/modules-2/files-2.1/com.google.android.apps.common.testing.accessibility.framework/accessibility-test-framework/2.0/7837f95bdff9f797003454247fef02b78d49ae75/accessibility-test-framework-2.0.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="952944218ecedea1554a513dec0c14d570642843">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_fbc33b266d9da5c3b0106a3e34998bc10e823ffd.jar" />
+        sha1="7837f95bdff9f797003454247fef02b78d49ae75">
+        <dex dex="/Users/vanessatsai/Expense/ExPractice/app/build/intermediates/pre-dexed/androidTest/debug/accessibility-test-framework-2.0_9a30c20e28241a6d7bd934049c760d87e2e9d197.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/389659f74de59fd0c176e0e2bfa253588c56e75f/output/jars/classes.jar"
+        jar="/Users/vanessatsai/.gradle/caches/modules-2/files-2.1/info.cukes/gherkin/2.12.2/17138631fa20fd0e44a13e50d6b7be59cee1a94/gherkin-2.12.2.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_d06950a1f32054789f0c9b396664087e0a0e7db9.jar" />
+        sha1="017138631fa20fd0e44a13e50d6b7be59cee1a94">
+        <dex dex="/Users/vanessatsai/Expense/ExPractice/app/build/intermediates/pre-dexed/androidTest/debug/gherkin-2.12.2_3232b7abe066222254c1bbde4b2cfc7f9a5fabae.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/cda3baccf4bb2226deb4b07bee641519989dc79d/output/jars/classes.jar"
+        jar="/Users/vanessatsai/.android/build-cache/7c0d5d261c018760fa4a92f7c264a6021dae0433/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_6f10308de9d77a24dd5f9464916cde7791924152.jar" />
+        sha1="56576e0b04aae5e9756bf6e791f74b5e3850ac03">
+        <dex dex="/Users/vanessatsai/Expense/ExPractice/app/build/intermediates/pre-dexed/androidTest/debug/classes_6daa5dd75435a352e0e6460af031d0120612ee7a.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/ca17eb5270ad46a337600d767e2bd63f249447da/output/jars/classes.jar"
+        jar="/Users/vanessatsai/.gradle/caches/modules-2/files-2.1/info.cukes/cucumber-core/1.2.4/72790b1da44d8d3d2764c6aef29865ee228bbeb1/cucumber-core-1.2.4.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_982c61ba6ee6595eab3ce5a89a456d504914dc62.jar" />
+        sha1="72790b1da44d8d3d2764c6aef29865ee228bbeb1">
+        <dex dex="/Users/vanessatsai/Expense/ExPractice/app/build/intermediates/pre-dexed/androidTest/debug/cucumber-core-1.2.4_2b2196cba5b549f39036d88a70b14aacb28509c9.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/7b96fec5cec6a4a63a080713f1b39ec7f04eff35/output/jars/classes.jar"
+        jar="/Users/vanessatsai/.gradle/caches/modules-2/files-2.1/info.cukes/cucumber-java/1.2.4/57cca534b7abe43f6dd7624b90d3d97d33d3023d/cucumber-java-1.2.4.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="9935891f23923f39d002087085d9696568a9f657">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_c6badf61aa9cec6f9f7b783cc4af3b793a8aa720.jar" />
+        sha1="57cca534b7abe43f6dd7624b90d3d97d33d3023d">
+        <dex dex="/Users/vanessatsai/Expense/ExPractice/app/build/intermediates/pre-dexed/androidTest/debug/cucumber-java-1.2.4_6052b76273e142d8c415227618805bf2f32ea53a.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/ed228591b1c768564cff4e2cb7829a83a9a8d8b1/output/jars/classes.jar"
+        jar="/Users/vanessatsai/.gradle/caches/modules-2/files-2.1/com.squareup.spoon/spoon-client/1.7.1/165d5d75e2ecbaa0aa19a3c92505df60bd6c71c9/spoon-client-1.7.1.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_1286ecafab6cc7af82d6146287fd4b121d0e81aa.jar" />
+        sha1="165d5d75e2ecbaa0aa19a3c92505df60bd6c71c9">
+        <dex dex="/Users/vanessatsai/Expense/ExPractice/app/build/intermediates/pre-dexed/androidTest/debug/spoon-client-1.7.1_f88c3b5174383970b2c5ed03043016e6134df586.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/e7a672bc42d80c4eb8d44cd3de0c7a7b164894cd/output/jars/classes.jar"
+        jar="/Users/vanessatsai/.gradle/caches/modules-2/files-2.1/info.cukes/cucumber-android/1.2.4/cf6fd6b0de808c6b28bf8e9d22f6572a180930a3/cucumber-android-1.2.4.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_b02da8d6f04b8ae3fbca6a20b777750d623bf28f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/f731e513e58c53d1d3d6363c0e1504c8ac4fa5be/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_0a56aa0f0ed5057a1b01e44ecab070bed2dad8e2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vanessatsai/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/26.0.0-alpha1/support-annotations-26.0.0-alpha1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="023ee503b631f69511e335a061ea008f8da60f40">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/support-annotations-26.0.0-alpha1_629978a21646e9ee15b0341684b32fd20e983de3.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/ca91eca5ed893a0e987ce04df771c59702f3a60d/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_adde68e566ff98cbe62fb96a224f3c913300eb85.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vanessatsai/.android/build-cache/9d43c695386117ffa54b6f19440591e12174c960/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
-        <dex dex="/Users/vanessatsai/Expense/app/build/intermediates/pre-dexed/debug/classes_3db5c8dfe282838bf1dcfe6c6aae412796ee194e.jar" />
+        sha1="cf6fd6b0de808c6b28bf8e9d22f6572a180930a3">
+        <dex dex="/Users/vanessatsai/Expense/ExPractice/app/build/intermediates/pre-dexed/androidTest/debug/cucumber-android-1.2.4_ccd039f144742b46944d7bb11f1871bd222d176a.jar" />
     </item>
 
 </items>
